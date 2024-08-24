@@ -1,0 +1,151 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 10px 20px;
+  }
+  
+  .search-bar {
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .nav-buttons button {
+    margin-left: 15px;
+    background-color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .settings-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .packages-container {
+    background-color: #d8e6f5;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .tab-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    background-color: #004a99;
+  }
+  
+  .packages-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .package-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .package-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .package-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .package-date {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .footer-left {
+    text-align: left;
+  }
+  
+  .footer-left .logo {
+    width: 80px;
+    height: auto;
+  }
+  
+  .footer-right {
+    display: flex;
+  }
+  
+  .footer-section {
+    margin-left: 40px;
+  }
+  
+  .footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .footer-section ul li:hover {
+    text-decoration: underline;
+  }
+  
