@@ -1,14 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-import Chatwithus from './pages/Chatwithus';
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Loading from './pages/Loading'
+import Chatwithus from './pages/Chatwithus'
+import History from './pages/History'
+import Packages from './pages/Packages'
+import Packageview from './pages/Packageview'
 
 
-function App() {
+
+
+export default function App() {
   return (
-    <div >
-      <Chatwithus/>
-    </div>
+   <BrowserRouter>
+   <Routes>
+   <Route path="/" element={<Loading/>} />
+    <Route path="/chatwithus" element={<Chatwithus/>} />
+    <Route path="/history" element={<History/>} />
+    <Route path="/packages" element={<Packages/>} />
+    <Route path="/packageview" element={<Packageview/>} />
+    
+   </Routes>
+   </BrowserRouter>
+
   );
 }
 
-export default App;
+
