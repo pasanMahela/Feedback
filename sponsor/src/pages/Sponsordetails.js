@@ -1,8 +1,16 @@
 import React from 'react';
 import './Sponsordetails.css';
+import {useNavigate} from 'react-router-dom';
 
-function FeedbackPage() {
-  const feedbacks = [
+function SponsorPage() {
+  const navigate =useNavigate();
+
+  const organizerviewe = () => {
+    navigate('/accountviewe')
+  }
+
+
+  const sponsors = [
     { id: 1, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
     { id: 2, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
     { id: 3, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
@@ -18,17 +26,17 @@ function FeedbackPage() {
         <nav>
           <button aria-label="Home">Home</button>
           <button aria-label="About Us">About Us</button>
-          <button aria-label="Contact Us">Feedback</button>
+          <button aria-label="Contact Us">Sponsor</button>
           <button aria-label="Privacy">Sponsor</button>
         </nav>
       </header>
       
       <main>
         <h1>Welcome to Melody Mesh.</h1>
-        <button className="feedback-btn" aria-label="Give Feedback">Sponsor details</button>
+        <button className="sponsor-btn" aria-label="Give Sponsor">Sponsor details</button>
         <div className="search-sort">
-          <input type="text" placeholder="Search feedback" className="search-input" aria-label="Search feedback" />
-          <button className="sort-btn" aria-label="Sort Feedback">Sort By</button>
+          <input type="text" placeholder="Search sponsor" className="search-input" aria-label="Search sponsor" />
+          <button className="sort-btn" aria-label="Sort Sponsor">Sort By</button>
         </div>
         
         <table>
@@ -41,12 +49,14 @@ function FeedbackPage() {
             </tr>
           </thead>
           <tbody>
-            {feedbacks.map((feedback) => (
-              <tr key={feedback.id}>
-                <td>{feedback.name}</td>
-                <td>{feedback.surname}</td>
-                <td>{feedback.email}</td>
-                <td><button className="view-btn" aria-label={`View feedback from ${feedback.name}`}>View</button></td>
+            {sponsors.map((sponsor) => (
+              <tr key={sponsor.id}>
+                <td>{sponsor.name}</td>
+                <td>{sponsor.surname}</td>
+                <td>{sponsor.email}</td>
+                <td><button 
+                onClick={organizerviewe}
+                className="view-btn" aria-label={`View sponsor from ${sponsor.name}`}>View</button></td>
               </tr>
             ))}
           </tbody>
@@ -79,4 +89,4 @@ function FeedbackPage() {
   );
 }
 
-export default FeedbackPage;
+export default SponsorPage;

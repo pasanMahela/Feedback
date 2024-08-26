@@ -1,8 +1,15 @@
 import React from 'react';
 import './Accountviewe.css';
 import Profilepic from '../Images/Profilepic.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const SponsorAccount = () => {
+
+    const navigate=useNavigate();
+
+    const Backtosponsordetails =() =>{
+        navigate('/sponsordetails')
+    }
     const purchaseHistory = [
         { package: "Melody Lite package", date: "12/08/2024" },
         { package: "Melody Pro package", date: "03/08/2024" },
@@ -45,7 +52,9 @@ const SponsorAccount = () => {
                     <button className="delete-all-btn">&#128465;</button>
                 </div>
 
-                <button className="back-btn">Back.</button>
+                <button
+                onClick={Backtosponsordetails}
+                className="back-btn">Back.</button>
             </div>
 
             <footer>
