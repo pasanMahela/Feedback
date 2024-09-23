@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import './Chatwithus.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function ChatApp() {
+  const navigate = useNavigate();
+
+  const Exit = () =>{
+    navigate('/packages');
+  }
   const [messages, setMessages] = useState([
     { id: 1, name: 'Hashan thilanga.', text: 'Hello. Good morning. How can I help you?' },
     { id: 2, name: 'Hashan thilanga.', text: ': is typing......' }
@@ -45,7 +52,9 @@ function ChatApp() {
           </div>
         </div>
 
-        <button className="exit-button">Exit.</button>
+        <button 
+        onClick={ Exit }
+        className="exit-button">Exit.</button>
       </main>
 
       <footer className="footer">

@@ -1,7 +1,14 @@
 import React from 'react';
 import './Createpackage.css';
+import { useNavigate } from 'react-router-dom';
 
 const SponsorPackages = () => {
+
+    const navigate = useNavigate();
+
+    const Createnewpackage = () =>{
+      navigate('/createnewpackage');
+    }
     const packages = [
         { id: 1, name: 'Melody Lite Package', price: '50,000 LKR' },
         { id: 2, name: 'Melody Big Package', price: '100,000 LKR' },
@@ -50,7 +57,9 @@ const SponsorPackages = () => {
                         </div>
                     ))}
                     <div className="package-card create-package">
-                        <button className="create-btn">Create New Package.</button>
+                        <button
+                        onClick={Createnewpackage}
+                        className="create-btn">Create New Package.</button>
                     </div>
                 </div>
 

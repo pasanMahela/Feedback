@@ -1,7 +1,24 @@
 import React from 'react';
 import './Packageview.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
+
+  const Previous = () =>{
+    navigate('/packages');
+  }
+  const History = () =>{
+    navigate('/history')
+  }
+  const Packages = () =>{
+    navigate('/packages')
+  }
+
+  const Purchase = () =>{
+    navigate('/purchase')
+  }
+
   return (
     <div className="app-container">
       <header className="header">
@@ -18,8 +35,12 @@ function App() {
 
       <main className="content">
         <div className="packages-header">
-          <button className="active">Packages.</button>
-          <button>History.</button>
+          <button 
+          onClick = {Packages}
+          className="active">Packages.</button>
+          <button
+          onClick={History}
+          >History.</button>
           <button disabled>Chat with us.</button>
         </div>
 
@@ -33,10 +54,14 @@ function App() {
             <li>Melody Mesh sponsorship</li>
             <li>5 Ads</li>
           </ul>
-          <button className="purchase-button">Purchase ›</button>
+          <button
+          onClick={Purchase}
+          className="purchase-button">Purchase ›</button>
         </div>
 
-        <button className="previous-button">‹‹ Previous.</button>
+        <button 
+        onClick={Previous}
+        className="previous-button">‹‹ Previous.</button>
       </main>
 
       <footer className="footer">

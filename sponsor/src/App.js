@@ -9,6 +9,8 @@ import Sponsordetails from './pages/Sponsordetails'
 import Accountviewe from './pages/Accountviewe'
 import Accountdelete from './pages/Accountdelete'
 import Createpackage from './pages/Createpackage'
+import Purchase from './pages/Purchase'
+import Createnewpackage from './pages/Createnewpackage'
 
 
 
@@ -28,6 +30,8 @@ export default function App() {
     <Route path="/accountviewe"  element={<Accountviewe/>} />
     <Route path="/accountdelete"  element={<Accountdelete/>} />
     <Route path="/createpackage"  element={<Createpackage/>} />
+    <Route path="/purchase"  element={<Purchase/>} />
+    <Route path="/createnewpackage"  element={<Createnewpackage/>} />
 
     
    </Routes>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './History.css'; // Link to your CSS file
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const packages = [
@@ -11,6 +12,15 @@ const packages = [
 ];
 
 function App() {
+  const navigate = useNavigate();
+
+  const Packages = () =>{
+    navigate('/packages');
+  }
+  const Chatwithus = () =>{
+    navigate('/Chatwithus')
+  }
+
   return (
     <div className="container">
       <header className="header">
@@ -29,8 +39,12 @@ function App() {
         <div className="packages-container">
           <div className="tab-bar">
             <button className="tab active">History.</button>
-            <button className="tab">Packages.</button>
-            <button className="tab">Chat with us.</button>
+            <button
+            onClick= {Packages}
+            className="tab">Packages.</button>
+            <button
+            onClick = {Chatwithus}
+            className="tab">Chat with us.</button>
           </div>
           <div className="packages-list">
             {packages.map((pkg, index) => (

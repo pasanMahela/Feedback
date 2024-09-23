@@ -1,7 +1,20 @@
 import React from 'react';
 import './Packages.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
+
+  const History = () => {
+    navigate('/history')
+  }
+  const Chatwithus = () =>{
+    navigate('/Chatwithus')
+  }
+  const Continue = () =>{
+    navigate('/packageview')
+
+  }
   return (
     <div className="app-container">
       <header className="header">
@@ -19,15 +32,21 @@ function App() {
       <main className="content">
         <div className="packages-header">
           <button className="active">Packages.</button>
-          <button>History.</button>
-          <button>Chat with us.</button>
+          <button
+          onClick={History}
+          >History.</button>
+          <button
+          onClick ={Chatwithus}
+          >Chat with us.</button>
         </div>
         <div className="packages">
           <div className="package-card">
             <h2>Melody</h2>
             <h3>Lite package.</h3>
             <p>50,000 LKR.</p>
-            <button>Continue ›</button>
+            <button
+            onClick={Continue}
+            >Continue ›</button>
           </div>
           <div className="package-card">
             <h2>Melody</h2>
@@ -45,7 +64,8 @@ function App() {
             <h2>Melody</h2>
             <h3>VIP package.</h3>
             <p>200,000 LKR.</p>
-            <button>Continue ›</button>
+            <button
+            >Continue ›</button>
           </div>
         </div>
         <button className="next-button">Next. ››</button>

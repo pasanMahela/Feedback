@@ -26,7 +26,7 @@ function SponsorPage() {
         <nav>
           <button aria-label="Home">Home</button>
           <button aria-label="About Us">About Us</button>
-          <button aria-label="Contact Us">Sponsor</button>
+          <button aria-label="Contact Us">Feedback</button>
           <button aria-label="Privacy">Sponsor</button>
         </nav>
       </header>

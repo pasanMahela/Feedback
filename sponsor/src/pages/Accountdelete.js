@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import './Accountdelete.css';
 import Profilepic from '../Images/Profilepic.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const SponsorAccount = () => {
+    const navigate = useNavigate();
+
+    const Backtosponsordetails= () =>{
+        navigate('/sponsordetails')
+    }
+
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const handleDeleteAccount = () => {
@@ -44,7 +51,9 @@ const SponsorAccount = () => {
                     </button>
                 </div>
 
-                <button className="back-btn">Back.</button>
+                <button 
+                onClick={Backtosponsordetails}
+                className="back-btn">Back.</button>
             </div>
 
             <footer>

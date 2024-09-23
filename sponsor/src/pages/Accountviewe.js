@@ -10,6 +10,11 @@ const SponsorAccount = () => {
     const Backtosponsordetails =() =>{
         navigate('/sponsordetails')
     }
+
+    const Accountdelete =() =>{
+        navigate('/Accountdelete')
+    }
+
     const purchaseHistory = [
         { package: "Melody Lite package", date: "12/08/2024" },
         { package: "Melody Pro package", date: "03/08/2024" },
@@ -49,7 +54,9 @@ const SponsorAccount = () => {
                             </li>
                         ))}
                     </ul>
-                    <button className="delete-all-btn">&#128465;</button>
+                    <button
+                    onClick={Accountdelete}
+                    className="delete-all-btn">&#128465;</button>
                 </div>
 
                 <button
