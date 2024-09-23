@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Packages.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
   const navigate = useNavigate();
+  const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/packages/list');
+        setPackages(response.data);
+      } catch (error) {
+        console.error('Error fetching packages:', error);
+      }
+    };
+
+    fetchPackages();
+  }, []);
 
   const History = () => {
-    navigate('/history')
-  }
-  const Chatwithus = () =>{
-    navigate('/Chatwithus')
-  }
-  const Continue = () =>{
-    navigate('/packageview')
+    navigate('/history');
+  };
 
-  }
+  const Chatwithus = () => {
+    navigate('/Chatwithus');
+  };
+
+  const Continue = (pkgId) => {
+    navigate(`/packageview/${pkgId}`);
+  };
+
   return (
     <div className="app-container">
       <header className="header">
@@ -32,43 +49,19 @@ function App() {
       <main className="content">
         <div className="packages-header">
           <button className="active">Packages.</button>
-          <button
-          onClick={History}
-          >History.</button>
-          <button
-          onClick ={Chatwithus}
-          >Chat with us.</button>
+          <button onClick={History}>History.</button>
+          <button onClick={Chatwithus}>Chat with us.</button>
         </div>
         <div className="packages">
-          <div className="package-card">
-            <h2>Melody</h2>
-            <h3>Lite package.</h3>
-            <p>50,000 LKR.</p>
-            <button
-            onClick={Continue}
-            >Continue ›</button>
-          </div>
-          <div className="package-card">
-            <h2>Melody</h2>
-            <h3>Big package.</h3>
-            <p>100,000 LKR.</p>
-            <button>Continue ›</button>
-          </div>
-          <div className="package-card">
-            <h2>Melody</h2>
-            <h3>Pro package.</h3>
-            <p>150,000 LKR.</p>
-            <button>Continue ›</button>
-          </div>
-          <div className="package-card">
-            <h2>Melody</h2>
-            <h3>VIP package.</h3>
-            <p>200,000 LKR.</p>
-            <button
-            >Continue ›</button>
-          </div>
+          {packages.map(pkg => (
+            <div className="package-card" key={pkg._id}>
+              <h2>{pkg.name}</h2>
+              <h3>{pkg.title}</h3>
+              <p>{pkg.price} LKR.</p>
+              <button onClick={() => Continue(pkg._id)}>Continue ›</button>
+            </div>
+          ))}
         </div>
-        <button className="next-button">Next. ››</button>
       </main>
 
       <footer className="footer">

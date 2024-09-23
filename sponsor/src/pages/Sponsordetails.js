@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Sponsordetails.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function SponsorPage() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sponsors, setSponsors] = useState([]); // State to store sponsors
+  const [loading, setLoading] = useState(true); // State for loading
 
-  const organizerviewe = () => {
-    navigate('/accountviewe')
+  const organizerviewe = (nicNumber) => {
+    navigate(`/accountviewe/${nicNumber}`);
   }
+  // Fetch sponsors from the backend
+  useEffect(() => {
+    const fetchSponsors = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/purchases/list'); // Adjust URL as needed
+        setSponsors(response.data); // Assuming response.data is an array of purchases
+      } catch (error) {
+        console.error('Error fetching sponsors:', error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
 
+    fetchSponsors();
+  }, []);
 
-  const sponsors = [
-    { id: 1, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
-    { id: 2, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
-    { id: 3, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
-    { id: 4, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
-    { id: 5, name: "Tom", surname: "Steewen", email: "steew@gmail.com" },
-    { id: 6, name: "Tom", surname: "Steewen", email: "steew@gmail.com" }
-  ];
+  const filteredSponsors = sponsors.filter(sponsor =>
+    sponsor.firstName && sponsor.firstName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const Packages = () => {
+    navigate('/createpackage');
+  };
 
   return (
     <div className="app-container">
@@ -26,41 +43,59 @@ function SponsorPage() {
         <nav>
           <button aria-label="Home">Home</button>
           <button aria-label="About Us">About Us</button>
-          <button aria-label="Contact Us">Feedback</button>
-          <button aria-label="Privacy">Sponsor</button>
+          <button aria-label="Feedback">Feedback</button>
+          <button aria-label="Sponsor">Sponsor</button>
         </nav>
       </header>
       
       <main>
-        <h1>Welcome to Melody Mesh.</h1>
-        <button className="sponsor-btn" aria-label="Give Sponsor">Sponsor details</button>
+        <h1>Sponsor Details</h1>
+        <button className="sponsor-btn" aria-label="View Packages" onClick={Packages}>View Packages</button>
         <div className="search-sort">
-          <input type="text" placeholder="Search sponsor" className="search-input" aria-label="Search sponsor" />
+          <input
+            type="text"
+            placeholder="Search sponsor"
+            className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search sponsor"
+          />
           <button className="sort-btn" aria-label="Sort Sponsor">Sort By</button>
         </div>
         
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>Email</th>
-              <th>Accounts</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sponsors.map((sponsor) => (
-              <tr key={sponsor.id}>
-                <td>{sponsor.name}</td>
-                <td>{sponsor.surname}</td>
-                <td>{sponsor.email}</td>
-                <td><button 
-                onClick={organizerviewe}
-                className="view-btn" aria-label={`View sponsor from ${sponsor.name}`}>View</button></td>
+        {loading ? ( // Show loading message while fetching data
+          <p>Loading sponsors...</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Accounts</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredSponsors.map((sponsor) => (
+                <tr key={sponsor.nicNumber}>
+                  <td>{sponsor.firstName}</td>
+                  <td>{sponsor.lastName}</td>
+                  <td>{sponsor.email}</td>
+                  <td>
+                    <button 
+                      onClick={() => organizerviewe(sponsor.nicNumber)}
+                      className="view-btn" 
+                      aria-label={`View sponsor from ${sponsor.firstName}`}>
+                      View
+                    </button>
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
+        )}
         
         <button className="save-btn" aria-label="Save">Save</button>
       </main>

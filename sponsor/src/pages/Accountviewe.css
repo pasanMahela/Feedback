@@ -153,3 +153,18 @@ footer {
     display: flex;
     gap: 40px;
 }
+
+.print-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .print-btn:hover {
+    background-color: #45a049;
+  }
+  

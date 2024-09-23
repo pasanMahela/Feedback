@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import './Packageview.css';
-import { useNavigate } from 'react-router-dom';
 
-function App() {
+function PackageView() {
   const navigate = useNavigate();
+  const { packageId } = useParams();
+  const [packageDetails, setPackageDetails] = useState(null);
 
-  const Previous = () =>{
-    navigate('/packages');
-  }
-  const History = () =>{
-    navigate('/history')
-  }
-  const Packages = () =>{
-    navigate('/packages')
-  }
+  useEffect(() => {
+    const fetchPackageDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/packages/view/${packageId}`);
+        setPackageDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching package details:', error);
+      }
+    };
 
-  const Purchase = () =>{
-    navigate('/purchase')
+    fetchPackageDetails();
+  }, [packageId]);
+
+  if (!packageDetails) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -35,33 +41,26 @@ function App() {
 
       <main className="content">
         <div className="packages-header">
-          <button 
-          onClick = {Packages}
-          className="active">Packages.</button>
-          <button
-          onClick={History}
-          >History.</button>
+          <button onClick={() => navigate('/packages')} className="active">Packages.</button>
+          <button onClick={() => navigate('/history')}>History.</button>
           <button disabled>Chat with us.</button>
         </div>
 
         <div className="package-details">
-          <h2>Melody Lite package.</h2>
-          <h3>50,000 LKR.</h3>
-          <ul className="benefits-list">
-            <li>🔴 Benefits.</li>
-            <li>Voice and visual advertisements</li>
-            <li>4 Melody Mesh main guest Tickets</li>
-            <li>Melody Mesh sponsorship</li>
-            <li>5 Ads</li>
-          </ul>
-          <button
-          onClick={Purchase}
-          className="purchase-button">Purchase ›</button>
+          <h2>{packageDetails.name}</h2>
+          <h3>{packageDetails.price} LKR</h3>
+          <h4>Package Contains:</h4>
+          <p>{packageDetails.description}</p>
+          {packageDetails.note && <p><strong>Note:</strong> {packageDetails.note}</p>}
+          <button 
+            onClick={() => navigate('/purchase', { state: { packageName: packageDetails.name, packagePrice: packageDetails.price } })} 
+            className="purchase-button">Purchase ›
+          </button>
+
+
         </div>
 
-        <button 
-        onClick={Previous}
-        className="previous-button">‹‹ Previous.</button>
+        <button onClick={() => navigate('/packages')} className="previous-button">‹‹ Previous</button>
       </main>
 
       <footer className="footer">
@@ -94,4 +93,5 @@ function App() {
     </div>
   );
 }
-export default App;
+
+export default PackageView;

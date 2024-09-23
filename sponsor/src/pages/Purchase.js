@@ -1,17 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Purchase.css';
 import Visa from '../Images/Visa.png';
 import Paypal from '../Images/Paypal.webp';
 import Googlepay from '../Images/Googlepay.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
-function App() {
+function Purchase() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const packageName = location.state?.packageName || 'Selected Package'; // Default value
+  const packagePrice = location.state?.packagePrice || '0.00'; // Default value
 
-    const navigate = useNavigate();
+  // State for form inputs
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [nicNumber, setNicNumber] = useState('');
+  const [principalAddress, setPrincipalAddress] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [email, setEmail] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardHolderName, setCardHolderName] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
+  const [cvv, setCvv] = useState('');
 
-    const Backtopackageview = () =>{
-      navigate('/packageview');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create purchase data object
+    const purchaseData = {
+      firstName,
+      lastName,
+      dateOfBirth,
+      nicNumber,
+      principalAddress,
+      postalCode,
+      email,
+      packageName,
+      packagePrice,
+      cardNumber,
+      cardHolderName,
+      expirationDate,
+      cvv,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/purchases/add', purchaseData);
+      console.log('Purchase created successfully:', response.data);
+      navigate('/packages'); // Redirect after successful purchase
+    } catch (error) {
+      console.error('Error creating purchase:', error);
+      // Handle error (e.g., show an alert or message)
     }
+  };
 
   return (
     <div className="app-container">
@@ -30,21 +72,17 @@ function App() {
       </div>
 
       <div className="package-container">
-        <h2 className="package-title">Melody Lite package.</h2>
+        <h2 className="package-title">{packageName}</h2>
+        <h3 className="package-price">Payment Amount: {packagePrice} LKR</h3>
 
-        <form className="package-form">
-          <input type="text" placeholder="First name" />
-          <input type="text" placeholder="Last name" />
-          <input type="date" placeholder="Date of birth" />
-          <input type="text" placeholder="Nic number" />
-          <select>
-            <option>Select package</option>
-            <option>Package 1</option>
-            <option>Package 2</option>
-          </select>
-          <input type="text" placeholder="Principal address" />
-          <input type="text" placeholder="Postal code" />
-          <input type="email" placeholder="Email" />
+        <form className="package-form" onSubmit={handleSubmit}>
+          <input type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <input type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+          <input type="text" placeholder="Nic number" value={nicNumber} onChange={(e) => setNicNumber(e.target.value)} />
+          <input type="text" placeholder="Principal address" value={principalAddress} onChange={(e) => setPrincipalAddress(e.target.value)} />
+          <input type="text" placeholder="Postal code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
           <div className="payment-icons">
             <img src={Visa} alt="Visa" />
@@ -52,14 +90,12 @@ function App() {
             <img src={Googlepay} alt="GPay" />
           </div>
 
-          <input type="text" placeholder="Card Number" />
-          <input type="text" placeholder="Card holder name" />
-          <input type="text" placeholder="Expiration Date" />
-          <input type="text" placeholder="CVV" />
+          <input type="text" placeholder="Card Number" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
+          <input type="text" placeholder="Card holder name" value={cardHolderName} onChange={(e) => setCardHolderName(e.target.value)} />
+          <input type="text" placeholder="Expiration Date" value={expirationDate} onChange={(e) => setExpirationDate(e.target.value)} />
+          <input type="text" placeholder="CVV" value={cvv} onChange={(e) => setCvv(e.target.value)} />
 
-          <button
-          onClick={Backtopackageview}
-          type="submit" className="pay-button">Pay</button>
+          <button type="submit" className="pay-button">Pay</button>
         </form>
       </div>
 
@@ -95,4 +131,4 @@ function App() {
   );
 }
 
-export default App;
+export default Purchase;

@@ -38,13 +38,10 @@ function App() {
       <main>
         <div className="packages-container">
           <div className="tab-bar">
-            <button className="tab active">History.</button>
-            <button
-            onClick= {Packages}
-            className="tab">Packages.</button>
+            <button className="tab active" onClick= {Packages}>Packages</button>
             <button
             onClick = {Chatwithus}
-            className="tab">Chat with us.</button>
+            className="tab">Chat with us</button>
           </div>
           <div className="packages-list">
             {packages.map((pkg, index) => (
@@ -53,9 +50,6 @@ function App() {
                   <p className="package-name">{pkg.name}</p>
                   <p className="package-date">{pkg.date}</p>
                 </div>
-                <button className="delete-button">
-                  <i className="fas fa-trash-alt"></i>
-                </button>
               </div>
             ))}
           </div>

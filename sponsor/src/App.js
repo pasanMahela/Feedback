@@ -25,9 +25,9 @@ export default function App() {
     <Route path="/chatwithus" element={<Chatwithus/>} />
     <Route path="/history" element={<History/>} />
     <Route path="/packages" element={<Packages/>} />
-    <Route path="/packageview" element={<Packageview/>} />
+    <Route path="/packageview/:packageId" element={<Packageview/>} />
     <Route path="/sponsordetails" element={<Sponsordetails/>} />
-    <Route path="/accountviewe"  element={<Accountviewe/>} />
+    <Route path="/accountviewe/:nic"  element={<Accountviewe/>} />
     <Route path="/accountdelete"  element={<Accountdelete/>} />
     <Route path="/createpackage"  element={<Createpackage/>} />
     <Route path="/purchase"  element={<Purchase/>} />
@@ -39,5 +39,6 @@ export default function App() {
 
   );
 }
+
 
 

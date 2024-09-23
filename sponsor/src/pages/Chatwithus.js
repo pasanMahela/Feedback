@@ -9,6 +9,10 @@ function ChatApp() {
   const Exit = () =>{
     navigate('/packages');
   }
+  const navigataPackages = () =>{
+    navigate('/packages');
+  }
+  
   const [messages, setMessages] = useState([
     { id: 1, name: 'Hashan thilanga.', text: 'Hello. Good morning. How can I help you?' },
     { id: 2, name: 'Hashan thilanga.', text: ': is typing......' }
@@ -30,7 +34,8 @@ function ChatApp() {
 
       <main className="content">
         <div className="chat-header">
-          <button className="active">Chat with us.</button>
+          <button className="active" onClick={ navigataPackages }>
+            Packages</button>
         </div>
 
         <div className="chat-box">
@@ -54,7 +59,7 @@ function ChatApp() {
 
         <button 
         onClick={ Exit }
-        className="exit-button">Exit.</button>
+        className="exit-button">Exit</button>
       </main>
 
       <footer className="footer">
